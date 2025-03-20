@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Numeração Sequencial Persistente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .box {
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      width: 280px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .box h2 {
+      margin-bottom: 10px;
+    }
+
+    .number {
+      font-size: 40px;
+      font-weight: bold;
+      color: #333;
+      margin: 15px 0;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="box">
+      <h2>Ofício</h2>
+      <div class="number" id="oficioNum">123</div>
+      <button class="btn" onclick="incrementar('oficio')">Próximo Número</button>
+    </div>
+
+    <div class="box">
+      <h2>Ordem de Missão</h2>
+      <div class="number" id="missaoNum">45</div>
+      <button class="btn" onclick="incrementar('missao')">Próximo Número</button>
+    </div>
+
+    <div class="box">
+      <h2>Outro</h2>
+      <div class="number" id="outroNum">97</div>
+      <button class="btn" onclick="incrementar('outro')">Próximo Número</button>
+    </div>
+  </div>
+
+  <script>
+    // Inicializa ou recupera os números salvos no localStorage
+    let oficio = parseInt(localStorage.getItem("oficio")) || 123;
+    let missao = parseInt(localStorage.getItem("missao")) || 45;
+    let outro  = parseInt(localStorage.getItem("outro"))  || 97;
+
+    // Atualiza a exibição inicial
+    document.getElementById("oficioNum").innerText = oficio;
+    document.getElementById("missaoNum").innerText = missao;
+    document.getElementById("outroNum").innerText  = outro;
+
+    // Função para incrementar e salvar o número
+    function incrementar(tipo) {
+      if (tipo === "oficio") {
+        oficio++;
+        localStorage.setItem("oficio", oficio);
+        document.getElementById("oficioNum").innerText = oficio;
+      } else if (tipo === "missao") {
+        missao++;
+        localStorage.setItem("missao", missao);
+        document.getElementById("missaoNum").innerText = missao;
+      } else if (tipo === "outro") {
+        outro++;
+        localStorage.setItem("outro", outro);
+        document.getElementById("outroNum").innerText = outro;
+      }
+    }
+  </script>
+
+</body>
+</html>
